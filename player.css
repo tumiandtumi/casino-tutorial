@@ -1,0 +1,329 @@
+/* player.css — スマホ用チュートリアル画面 */
+:root {
+  --felt: #0f5a3c;
+  --felt-dark: #0a3f2a;
+  --felt-line: rgba(255, 255, 255, 0.14);
+  --gold: #e8c46a;
+  --gold-dark: #b8913a;
+  --ink: #1b1b1f;
+  --paper: #fbf8f1;
+  --red: #c4302b;
+  --shade: rgba(4, 12, 9, 0.68);
+  --font: "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Noto Sans JP", "Yu Gothic UI", "Meiryo", system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+html, body { margin: 0; height: 100%; background: #07150f; color: var(--paper); font-family: var(--font); }
+body { overscroll-behavior: none; }
+button { font-family: inherit; }
+
+/* ---------- 全体 ---------- */
+.tp-root {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  background: radial-gradient(120% 80% at 50% 35%, var(--felt) 0%, var(--felt-dark) 70%, #072a1c 100%);
+}
+
+.tp-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: calc(10px + env(safe-area-inset-top)) 14px 12px;
+  background: rgba(0, 0, 0, 0.28);
+  border-bottom: 1px solid var(--felt-line);
+}
+.tp-title { flex: 1; font-size: 14px; font-weight: 700; letter-spacing: .02em; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.tp-mute {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid var(--felt-line); background: rgba(255, 255, 255, 0.08);
+  color: var(--paper); font-size: 18px; line-height: 1; cursor: pointer;
+}
+.tp-progress { position: absolute; left: 0; right: 0; bottom: -1px; height: 3px; background: rgba(255, 255, 255, 0.08); }
+.tp-progress-bar { height: 100%; width: 0; background: var(--gold); transition: width .4s ease; }
+
+.tp-stage { position: relative; flex: 1; min-height: 0; }
+.tp-board { position: absolute; inset: 0; display: flex; flex-direction: column; }
+
+/* ---------- タップ受け・スポットライト・指マーク ---------- */
+.tp-catcher { position: absolute; inset: 0; z-index: 30; pointer-events: none; }
+.tp-catcher.tp-block { pointer-events: auto; }
+
+.tp-spot {
+  position: absolute; z-index: 20; pointer-events: none;
+  border-radius: 14px;
+  box-shadow: 0 0 0 9999px var(--shade);
+  border: 2px solid var(--gold);
+  opacity: 0; transition: opacity .25s ease, left .3s ease, top .3s ease, width .3s ease, height .3s ease;
+}
+.tp-spot.tp-show { opacity: 1; }
+.tp-spot.tp-pulse { animation: tp-pulse 1.2s ease-in-out infinite; }
+@keyframes tp-pulse {
+  0%, 100% { box-shadow: 0 0 0 9999px var(--shade), 0 0 0 0 rgba(232, 196, 106, .7); }
+  50% { box-shadow: 0 0 0 9999px var(--shade), 0 0 0 10px rgba(232, 196, 106, 0); }
+}
+
+.tp-finger { position: absolute; left: 0; top: 0; z-index: 40; pointer-events: none; opacity: 0; }
+.tp-finger.tp-show { opacity: 1; }
+.tp-finger-hand { position: absolute; left: -6px; top: -2px; font-size: 40px; filter: drop-shadow(0 3px 4px rgba(0,0,0,.5)); }
+.tp-finger-ring { position: absolute; left: -22px; top: -22px; width: 44px; height: 44px; border-radius: 50%; border: 3px solid #fff; opacity: 0; }
+.tp-finger.tp-tap .tp-finger-ring { animation: tp-ring .45s ease-out; }
+.tp-finger.tp-tap .tp-finger-hand { animation: tp-press .3s ease; }
+@keyframes tp-ring { from { opacity: 1; transform: scale(.4); } to { opacity: 0; transform: scale(1.4); } }
+@keyframes tp-press { 50% { transform: translateY(6px) scale(.92); } }
+
+/* ---------- テキスト ---------- */
+.tp-textbox {
+  position: absolute; left: 12px; right: 12px; z-index: 35;
+  padding: 16px 18px 20px;
+  border-radius: 14px;
+  background: rgba(251, 248, 241, 0.97);
+  color: var(--ink);
+  border: 2px solid var(--gold-dark);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .45);
+  font-size: 16px; line-height: 1.65; font-weight: 500;
+  opacity: 0; transform: translateY(8px); pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+  white-space: pre-wrap;
+}
+.tp-textbox.tp-visible { opacity: 1; transform: none; }
+.tp-textbox.tp-pos-bottom { bottom: calc(14px + env(safe-area-inset-bottom)); }
+.tp-textbox.tp-pos-top { top: 14px; }
+/* ブラックジャックは盤面の中央が空いているので、上に出すときはディーラーの手札を隠さない位置にする */
+.tp-stage:has(.bj-table) .tp-textbox.tp-pos-top { top: 23%; }
+.tp-textbox.tp-prompt { border-color: var(--gold); background: #fffdf6; }
+.tp-textbox.tp-prompt::before {
+  content: "やってみよう"; position: absolute; left: 14px; top: -11px;
+  padding: 1px 10px; border-radius: 99px; font-size: 11px; font-weight: 700;
+  background: var(--gold); color: var(--ink);
+}
+.tp-textbox.tp-error { border-color: var(--red); }
+.tp-textbox.tp-shake { animation: tp-shake .35s ease; }
+@keyframes tp-shake { 25% { transform: translateX(-6px); } 75% { transform: translateX(6px); } }
+.tp-next { position: absolute; right: 14px; bottom: 6px; font-size: 12px; color: var(--gold-dark); opacity: 0; }
+.tp-next.tp-show { opacity: 1; animation: tp-blink 1s steps(2) infinite; }
+@keyframes tp-blink { 50% { opacity: .2; } }
+
+/* ---------- 開始・終了画面 ---------- */
+.tp-cover {
+  position: absolute; inset: 0; z-index: 60;
+  display: flex; align-items: center; justify-content: center; padding: 24px;
+  background: rgba(4, 16, 11, 0.86);
+  backdrop-filter: blur(3px);
+}
+.tp-cover-box { width: 100%; max-width: 380px; text-align: center; }
+.tp-cover-game {
+  display: inline-block; padding: 4px 14px; border-radius: 99px;
+  border: 1px solid var(--gold); color: var(--gold); font-size: 12px; letter-spacing: .12em;
+}
+.tp-cover-title { margin: 16px 0 10px; font-size: 26px; line-height: 1.35; }
+.tp-cover-desc { margin: 0 0 10px; font-size: 15px; line-height: 1.7; color: rgba(251, 248, 241, .85); }
+.tp-cover-meta { margin: 0 0 26px; font-size: 12px; color: rgba(251, 248, 241, .6); }
+.tp-cover-btn {
+  width: 100%; padding: 16px; border: 0; border-radius: 14px;
+  background: linear-gradient(180deg, #f1d385, var(--gold));
+  color: var(--ink); font-size: 18px; font-weight: 800; letter-spacing: .1em; cursor: pointer;
+  box-shadow: 0 6px 0 var(--gold-dark), 0 10px 24px rgba(0,0,0,.4);
+}
+.tp-cover-btn:active { transform: translateY(3px); box-shadow: 0 3px 0 var(--gold-dark); }
+
+/* ---------- メニュー(URLにゲーム指定がないとき) ---------- */
+.tp-menu { max-width: 520px; margin: 0 auto; padding: 28px 18px; }
+.tp-menu h1 { font-size: 22px; margin: 0 0 6px; }
+.tp-menu p { color: rgba(251, 248, 241, .7); font-size: 14px; margin: 0 0 20px; }
+.tp-menu a {
+  display: block; margin-bottom: 12px; padding: 16px 18px; border-radius: 14px;
+  background: rgba(255,255,255,.07); border: 1px solid var(--felt-line);
+  color: var(--paper); text-decoration: none;
+}
+.tp-menu a strong { display: block; font-size: 17px; margin-bottom: 4px; }
+.tp-menu a span { font-size: 13px; color: rgba(251, 248, 241, .65); }
+.tp-message { padding: 40px 24px; text-align: center; line-height: 1.8; }
+
+/* ================= ブラックジャック盤面 ================= */
+.bj-table {
+  position: relative; flex: 1; min-height: 0;
+  display: flex; flex-direction: column; justify-content: space-between;
+  padding: 14px 12px 8px;
+}
+.bj-table::before {
+  content: ""; position: absolute; left: -10%; right: -10%; top: 44%; height: 50%;
+  border: 1px solid var(--felt-line); border-radius: 50% 50% 0 0 / 40% 40% 0 0; pointer-events: none;
+}
+.bj-area { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.bj-label { font-size: 11px; letter-spacing: .2em; color: rgba(251, 248, 241, .55); }
+.bj-hand { display: flex; justify-content: center; min-height: 86px; min-width: 70px; padding: 2px; }
+.bj-total {
+  min-height: 24px; padding: 2px 12px; border-radius: 99px;
+  background: rgba(0, 0, 0, .35); font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums;
+}
+.bj-total:empty { background: transparent; }
+
+.bj-card {
+  position: relative; width: 58px; height: 82px; margin-left: -18px;
+  border-radius: 7px; background: #fff; color: #1d1d22;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, .35);
+  border: 1px solid rgba(0,0,0,.12);
+}
+.bj-card:first-child { margin-left: 0; }
+.bj-card.bj-red { color: var(--red); }
+.bj-rank { position: absolute; left: 6px; top: 3px; font-size: 18px; font-weight: 800; letter-spacing: -.04em; }
+.bj-suit { position: absolute; left: 7px; top: 24px; font-size: 13px; }
+.bj-pip { position: absolute; right: 7px; bottom: 4px; font-size: 26px; }
+.bj-back {
+  background:
+    repeating-linear-gradient(45deg, rgba(255,255,255,.12) 0 4px, transparent 4px 8px),
+    linear-gradient(160deg, #7a1d27, #4a0f16);
+  border: 3px solid #fff;
+}
+.bj-enter { animation: bj-enter .38s cubic-bezier(.2,.8,.3,1) both; }
+@keyframes bj-enter { from { opacity: 0; transform: translate(60px, -90px) rotate(18deg); } }
+
+.bj-middle { position: relative; display: flex; align-items: center; justify-content: center; min-height: 54px; }
+.bj-shoe { position: absolute; right: 4px; top: 50%; transform: translateY(-50%) scale(.62); transform-origin: right center; display: flex; }
+.bj-shoe .bj-card { margin-left: -50px; }
+.bj-banner {
+  padding: 6px 18px; border-radius: 99px; font-size: 16px; font-weight: 800;
+  background: rgba(0,0,0,.4); opacity: 0; transform: scale(.9); transition: all .25s ease;
+}
+.bj-banner.bj-show { opacity: 1; transform: none; }
+.bj-banner-win { background: var(--gold); color: var(--ink); }
+.bj-banner-lose { background: rgba(196, 48, 43, .85); }
+
+.bj-hands { display: flex; justify-content: center; gap: 14px; width: 100%; }
+.bj-handbox { position: relative; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 6px; border-radius: 12px; border: 2px solid transparent; }
+.bj-hands.bj-split .bj-card { width: 50px; height: 72px; margin-left: -22px; }
+.bj-hands.bj-split .bj-card:first-child { margin-left: 0; }
+.bj-hands.bj-split .bj-pip { font-size: 22px; }
+.bj-handbox.bj-active { border-color: rgba(232, 196, 106, .8); background: rgba(232, 196, 106, .08); }
+.bj-result { position: absolute; top: -4px; left: 50%; transform: translateX(-50%); padding: 2px 10px; border-radius: 99px; font-size: 12px; font-weight: 800; white-space: nowrap; background: #333; }
+.bj-result-win, .bj-result-blackjack { background: var(--gold); color: var(--ink); }
+.bj-result-lose, .bj-result-bust { background: var(--red); }
+
+.bj-betspot { display: flex; align-items: center; gap: 8px; min-height: 30px; padding: 2px 10px; border-radius: 99px; }
+.bj-chipstack { display: flex; }
+.bj-chip {
+  width: 24px; height: 24px; margin-left: -16px; border-radius: 50%;
+  background: radial-gradient(circle, #c8372f 0 42%, #fff 43% 48%, #c8372f 49%);
+  border: 3px dashed rgba(255,255,255,.9); box-shadow: 0 2px 3px rgba(0,0,0,.45);
+}
+.bj-chip:first-child { margin-left: 0; }
+.bj-betamount { font-size: 13px; font-weight: 700; }
+.bj-muted { color: rgba(251, 248, 241, .45); }
+
+.bj-info { display: flex; justify-content: center; padding-top: 6px; }
+.bj-chipcount { padding: 3px 14px; border-radius: 99px; font-size: 13px; font-weight: 700; background: rgba(0, 0, 0, .3); color: var(--gold); }
+
+.bj-controls {
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px;
+  padding: 10px 12px calc(12px + env(safe-area-inset-bottom));
+  background: rgba(0, 0, 0, .3); border-top: 1px solid var(--felt-line);
+}
+.bj-btn {
+  padding: 13px 0; border-radius: 12px; border: 1px solid rgba(255,255,255,.18);
+  background: rgba(255, 255, 255, .08); color: rgba(251, 248, 241, .55);
+  font-size: 14px; font-weight: 800; cursor: pointer;
+}
+.tp-root .bj-input .bj-btn { color: var(--paper); background: rgba(255, 255, 255, .14); }
+.bj-btn:active { transform: translateY(1px); }
+.bj-btn-bet { border-color: rgba(232, 196, 106, .5); }
+
+@media (max-height: 620px) {
+  .bj-card { width: 50px; height: 70px; }
+  .bj-hand { min-height: 74px; }
+  .bj-pip { font-size: 22px; }
+  .tp-textbox { font-size: 15px; padding: 12px 14px 16px; }
+}
+
+/* ================= ルーレット盤面 ================= */
+.rl-table { position: relative; flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: space-between; gap: 8px; padding: 12px 12px 8px; }
+.rl-board { display: flex; flex-direction: column; gap: 6px; }
+.rl-grid { display: grid; grid-template-columns: 1.25fr repeat(12, 1fr); grid-template-rows: repeat(3, 36px); gap: 2px; padding: 4px; border-radius: 8px; }
+.rl-cell {
+  position: relative; display: flex; align-items: center; justify-content: center; padding: 0; min-width: 0;
+  border: 1px solid rgba(255, 255, 255, .35); border-radius: 4px;
+  background: rgba(255, 255, 255, .06); color: #fff; font-size: 12px; font-weight: 800; cursor: pointer;
+}
+.rl-cell-label { position: relative; z-index: 1; }
+.rl-red { background: #b8282a; }
+.rl-black { background: #1c1c1f; }
+.rl-green { background: #1f7a4a; }
+.rl-zero { font-size: 15px; }
+.rl-outside { display: flex; flex-direction: column; gap: 2px; padding: 0 4px 4px; border-radius: 8px; }
+.rl-row { display: grid; gap: 2px; }
+.rl-row .rl-cell { height: 36px; }
+.rl-row-3 { grid-template-columns: repeat(3, 1fr); }
+.rl-row-6 { grid-template-columns: repeat(6, 1fr); }
+.rl-row-6 .rl-cell { font-size: 11px; }
+.rl-chip {
+  position: absolute; z-index: 2; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  display: grid; place-items: center; width: 24px; height: 24px; border-radius: 50%;
+  background: radial-gradient(circle, #f4e2a8 0 46%, #c8372f 47%);
+  border: 2px dashed #fff; color: #1b1b1f; font-size: 9px; font-weight: 800;
+  box-shadow: 0 2px 4px rgba(0,0,0,.5); animation: rl-drop .25s ease-out;
+}
+@keyframes rl-drop { from { transform: translate(-50%, -90%) scale(1.3); opacity: 0; } }
+.rl-chip-win { box-shadow: 0 0 0 3px var(--gold), 0 0 14px var(--gold); }
+.rl-chip-lose { opacity: .25; }
+.rl-hit { outline: 3px solid var(--gold); outline-offset: 1px; z-index: 3; animation: tp-blink 1s steps(2) 3; }
+
+.rl-top { display: flex; align-items: center; justify-content: center; gap: 20px; }
+.rl-wheel { position: relative; width: min(46vw, 190px); aspect-ratio: 1; }
+@media (max-height: 700px) { .rl-wheel { width: min(38vw, 150px); } }
+.rl-spinner { position: absolute; inset: 0; border-radius: 50%; box-shadow: 0 8px 24px rgba(0,0,0,.5); }
+.rl-wheel-svg { display: block; width: 100%; height: 100%; }
+.rl-orbit { position: absolute; inset: 0; opacity: 0; pointer-events: none; }
+.rl-orbit.rl-show { opacity: 1; }
+.rl-ball { position: absolute; left: 50%; top: 9%; width: 9%; height: 9%; border-radius: 50%; transform: translateX(-50%); background: radial-gradient(circle at 35% 35%, #fff, #c9c9c9); box-shadow: 0 1px 3px rgba(0,0,0,.6); }
+.rl-pointer { position: absolute; left: 50%; top: -8px; transform: translateX(-50%); border-left: 9px solid transparent; border-right: 9px solid transparent; border-top: 14px solid var(--gold); filter: drop-shadow(0 2px 2px rgba(0,0,0,.5)); }
+.rl-result { display: flex; flex-direction: column; align-items: center; justify-content: center; min-width: 86px; padding: 10px 12px; border-radius: 14px; background: rgba(0,0,0,.35); border: 1px solid var(--felt-line); }
+.rl-result-num { font-size: 34px; font-weight: 800; line-height: 1.1; font-variant-numeric: tabular-nums; }
+.rl-result-label { font-size: 11px; color: rgba(251, 248, 241, .7); }
+.rl-result-red { background: #b8282a; }
+.rl-result-black { background: #1c1c1f; }
+.rl-result-green { background: #1f7a4a; }
+.rl-banner { align-self: center; min-height: 0; padding: 6px 18px; border-radius: 99px; font-size: 15px; font-weight: 800; background: rgba(0,0,0,.4); opacity: 0; transform: scale(.9); transition: all .25s ease; }
+.rl-banner.bj-show { opacity: 1; transform: none; }
+.rl-info { display: flex; justify-content: center; gap: 10px; }
+.rl-bettotal { padding: 3px 14px; border-radius: 99px; font-size: 13px; font-weight: 700; background: rgba(0,0,0,.3); }
+.rl-controls { padding: 10px 12px calc(12px + env(safe-area-inset-bottom)); background: rgba(0,0,0,.3); border-top: 1px solid var(--felt-line); }
+.rl-spin-btn { width: 100%; font-size: 16px; letter-spacing: .2em; }
+
+/* ================= ポーカー盤面 ================= */
+.pk-table { position: relative; flex: 1; min-height: 0; display: flex; flex-direction: column; justify-content: space-between; padding: 10px 12px 8px; }
+.pk-seat { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.pk-seat-head { display: flex; align-items: center; gap: 10px; }
+.pk-chips { font-size: 12px; font-weight: 700; color: var(--gold); }
+.pk-opp .bj-card { width: 46px; height: 66px; margin-left: -12px; }
+.pk-opp .bj-card:first-child { margin-left: 0; }
+.pk-opp .bj-hand { min-height: 70px; }
+.pk-opp .bj-pip { font-size: 20px; }
+.pk-opp .bj-rank { font-size: 15px; }
+.pk-said {
+  min-height: 22px; padding: 2px 12px; border-radius: 99px; font-size: 12px; font-weight: 800;
+  background: rgba(251, 248, 241, .95); color: var(--ink); opacity: 0; transform: translateY(4px); transition: all .2s ease;
+}
+.pk-said.pk-show { opacity: 1; transform: none; }
+.pk-rank { min-height: 18px; font-size: 12px; font-weight: 700; color: var(--gold); }
+.pk-rank-me { font-size: 14px; }
+.pk-center { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+.pk-stage { min-height: 16px; font-size: 11px; letter-spacing: .25em; color: rgba(251, 248, 241, .6); }
+.pk-board { display: flex; gap: 5px; padding: 6px; border-radius: 10px; }
+.pk-board .bj-card, .pk-slot { width: 52px; height: 74px; margin-left: 0; }
+.pk-board .bj-pip { font-size: 22px; }
+.pk-slot { border-radius: 7px; border: 1.5px dashed rgba(255,255,255,.22); }
+.pk-pot { padding: 3px 16px; border-radius: 99px; font-size: 13px; font-weight: 800; background: rgba(0,0,0,.35); color: var(--gold); }
+.pk-best { box-shadow: 0 0 0 3px var(--gold), 0 0 16px rgba(232, 196, 106, .8); }
+.pk-controls { grid-template-columns: repeat(5, 1fr); gap: 6px; }
+.pk-controls .bj-btn { font-size: 12px; letter-spacing: -.03em; white-space: nowrap; }
+@media (max-height: 640px) {
+  .pk-board .bj-card, .pk-slot { width: 44px; height: 62px; }
+  .pk-opp .bj-card { width: 38px; height: 54px; }
+}

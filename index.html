@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0a3f2a">
+  <title>カジノ ルール説明</title>
+  <link rel="stylesheet" href="player.css">
+</head>
+<body>
+  <div id="app" class="tp-root"></div>
+
+  <script src="sound.js"></script>
+  <script src="games/blackjack.js"></script>
+  <script src="games/roulette.js"></script>
+  <script src="games/poker.js"></script>
+  <!-- 新しいゲームを追加したら、ここに games/○○.js を足す -->
+  <script src="engine.js"></script>
+  <script>
+    (function () {
+      'use strict';
+      const app = document.getElementById('app');
+      const params = new URLSearchParams(location.search);
+      let runner = null;
+
+      function message(text) {
+        app.innerHTML = '';
+        const m = document.createElement('div');
+        m.className = 'tp-message';
+        m.textContent = text;
+        app.append(m);
+      }
+
+      function play(tutorial, opts) {
+        if (runner) runner.stop();
+        try {
+          runner = new TutorialRunner(app, tutorial, Object.assign({
+            onRestart: (r) => { runner = r; }
+          }, opts || {}));
+          runner.start();
+        } catch (e) {
+          message(e.message || String(e));
+        }
+      }
+
+      // ---- 作成ツールのプレビュー ----
+      if (params.get('preview') === '1') {
+        window.addEventListener('message', (e) => {
+          const d = e.data || {};
+          if (d.type === 'load' && d.tutorial) {
+            play(d.tutorial, {
+              startAt: d.startAt || 0,
+              skipIntro: !!d.skipIntro,
+              onStep: (i) => parent.postMessage({ type: 'step', index: i }, '*'),
+              onEnd: () => parent.postMessage({ type: 'end' }, '*')
+            });
+          } else if (d.type === 'stop' && runner) {
+            runner.stop();
+          }
+        });
+        message('左の「再生」を押すと、ここにスマホの画面が表示されます');
+        parent.postMessage({ type: 'ready' }, '*');
+        return;
+      }
+
+      // ---- 公開ページ:?t=<ID> でチュートリアルを開く ----
+      const id = params.get('t');
+      if (id) {
+        if (!/^[a-z0-9-]+$/.test(id)) { message('URLが正しくありません'); return; }
+        message('読み込み中…');
+        fetch('tutorials/' + id + '.json', { cache: 'no-store' })
+          .then((r) => { if (!r.ok) throw new Error('not found'); return r.json(); })
+          .then((t) => play(t))
+          .catch(() => message('チュートリアルが見つかりませんでした。QRコードをもう一度読み込んでください。'));
+        return;
+      }
+
+      // ---- ゲーム指定なし:一覧を出す ----
+      fetch('tutorials/index.json', { cache: 'no-store' })
+        .then((r) => (r.ok ? r.json() : []))
+        .catch(() => [])
+        .then((list) => {
+          app.classList.remove('tp-root');
+          app.innerHTML = '';
+          const menu = document.createElement('div');
+          menu.className = 'tp-menu';
+          const h = document.createElement('h1');
+          h.textContent = 'カジノ ルール説明';
+          const p = document.createElement('p');
+          p.textContent = (list && list.length) ? '遊び方を知りたいゲームを選んでください' : 'まだチュートリアルが公開されていません';
+          menu.append(h, p);
+          (list || []).forEach((item) => {
+            const a = document.createElement('a');
+            a.href = '?t=' + encodeURIComponent(item.id);
+            const s = document.createElement('strong');
+            s.textContent = item.title || item.id;
+            const span = document.createElement('span');
+            span.textContent = item.description || '';
+            a.append(s, span);
+            menu.append(a);
+          });
+          app.append(menu);
+        });
+    })();
+  </script>
+</body>
+</html>
