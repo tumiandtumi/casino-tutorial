@@ -1,0 +1,24 @@
+{
+  "format": 1,
+  "id": "blackjack-1",
+  "game": "blackjack",
+  "title": "ブラックジャックの遊び方",
+  "description": "",
+  "endMessage": "",
+  "bgm": "lounge",
+  "setup": {
+    "deck": "10H 7C 6S 10D 4H",
+    "chips": 100
+  },
+  "steps": [
+    {
+      "type": "text",
+      "text": "ようこそ!ここに最初の説明を書きます。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    }
+  ]
+}

@@ -14,6 +14,13 @@
     "updatedAt": "2026-10-28T02:54:29.572Z"
   },
   {
+    "id": "blackjack-1",
+    "title": "ブラックジャックの遊び方",
+    "game": "blackjack",
+    "description": "",
+    "updatedAt": "2026-10-28T02:57:30.633Z"
+  },
+  {
     "id": "poker-basic",
     "title": "ポーカー(テキサスホールデム)の遊び方",
     "game": "poker",
