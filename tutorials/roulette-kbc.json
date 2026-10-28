@@ -1,0 +1,70 @@
+{
+  "format": 1,
+  "id": "roulette-kbc",
+  "game": "roulette",
+  "title": "ルーレットの遊び方",
+  "description": "ボールが止まる数字を当てるゲーム。",
+  "endMessage": "ルールがわかったら、ルーレットのテーブルで遊んでみてください!",
+  "bgm": "lounge",
+  "setup": {
+    "chips": 100
+  },
+  "steps": [
+    {
+      "type": "text",
+      "text": "ルーレットは、ボールがどの数字に止まるかを当てるゲームです。数字は0〜36の37マスあります。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "wheel",
+      "sound": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "bet",
+      "params": {
+        "kind": "red",
+        "number": 17,
+        "amount": 10
+      },
+      "finger": true,
+      "speed": "normal",
+      "text": "「赤」のマスにチップを10枚置きます。",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "text",
+      "text": "今度はあなたの番です!",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "input",
+      "action": "bet",
+      "params": {
+        "kind": "black",
+        "number": 17,
+        "amount": 10
+      },
+      "text": "「黒」のマスを押して、チップを置いてみましょう。",
+      "hint": "光っている「黒」のマスを押してください。",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "input",
+      "action": "spin",
+      "params": {
+        "result": 17
+      },
+      "text": "",
+      "hint": "",
+      "highlight": "",
+      "position": "auto"
+    }
+  ]
+}

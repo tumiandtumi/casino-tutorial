@@ -19,5 +19,12 @@
     "game": "poker",
     "description": "手札2枚と場の5枚で役を作るゲーム。賭けの流れを覚えよう。",
     "updatedAt": "2026-10-27T18:07:29.654Z"
+  },
+  {
+    "id": "roulette-kbc",
+    "title": "ルーレットの遊び方",
+    "game": "roulette",
+    "description": "ボールが止まる数字を当てるゲーム。",
+    "updatedAt": "2026-10-28T02:55:34.892Z"
   }
 ]
