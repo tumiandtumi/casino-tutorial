@@ -28,6 +28,13 @@
     "updatedAt": "2026-10-27T18:07:29.654Z"
   },
   {
+    "id": "poker-poker",
+    "title": "ポーカー(テキサスホールデム)の遊び方",
+    "game": "poker",
+    "description": "手札2枚と場の5枚で役を作るゲーム。",
+    "updatedAt": "2026-10-28T02:58:56.335Z"
+  },
+  {
     "id": "roulette-kbc",
     "title": "ルーレットの遊び方",
     "game": "roulette",

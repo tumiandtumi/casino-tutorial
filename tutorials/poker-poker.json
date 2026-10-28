@@ -1,0 +1,49 @@
+{
+  "format": 1,
+  "id": "poker-poker",
+  "game": "poker",
+  "title": "ポーカー(テキサスホールデム)の遊び方",
+  "description": "手札2枚と場の5枚で役を作るゲーム。",
+  "endMessage": "ルールがわかったら、ポーカーのテーブルで遊んでみてください!",
+  "bgm": "night",
+  "setup": {
+    "deck": "AH 9C AS 8D KD 7C 2S QH 3D",
+    "chips": 100,
+    "opponentChips": 100
+  },
+  "steps": [
+    {
+      "type": "text",
+      "text": "テキサスホールデムは、自分の手札2枚と、みんなで使う場のカード5枚を組み合わせて、一番強い5枚の役を作るゲームです。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "blinds",
+      "params": {
+        "small": 5,
+        "big": 10,
+        "player": "small"
+      },
+      "finger": false,
+      "speed": "normal",
+      "text": "最初に2人が決まった額を出します(ブラインド)。これがポットに入ります。",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "deal",
+      "params": {},
+      "finger": false,
+      "speed": "normal",
+      "text": "手札が2枚ずつ配られます。相手の手札は見えません。",
+      "highlight": "",
+      "position": "auto"
+    }
+  ]
+}
