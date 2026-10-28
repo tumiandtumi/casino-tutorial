@@ -1,0 +1,426 @@
+{
+  "format": 1,
+  "id": "blackjack-sample",
+  "game": "blackjack",
+  "title": "ブラックジャックの遊び方",
+  "description": "21に近い方が勝ち。見本を見たあと、実際に操作して覚えよう。",
+  "endMessage": "ルールがわかったら、ブラックジャックのテーブルで遊んでみてください!",
+  "bgm": "lounge",
+  "setup": {
+    "deck": "10H 7C 6S 10D 4H 9S 9H 2D 8C KC 10C 6H 5D 10S 9D 8H 6C 8D QH 3S JS 9C 7D",
+    "chips": 100
+  },
+  "steps": [
+    {
+      "type": "text",
+      "text": "ようこそ!ブラックジャックは、ディーラーと1対1で勝負するゲームです。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "カードの合計が21に近い方が勝ち。ただし21を超えると「バースト」で、その時点で負けになります。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "カードの数え方:2〜10はそのままの数。J・Q・Kは10。Aは1か11の好きな方で数えます。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "まずはディーラーが1回やってみせます。よく見ていてください。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "bet",
+      "params": {
+        "amount": 10
+      },
+      "finger": true,
+      "speed": "normal",
+      "text": "最初にチップを賭けます(ベット)。",
+      "highlight": "",
+      "position": "auto",
+      "sound": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "deal",
+      "params": {},
+      "finger": false,
+      "speed": "normal",
+      "text": "カードが配られます。自分は2枚とも表、ディーラーは1枚が伏せたままです。",
+      "highlight": "",
+      "position": "auto",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "自分の合計は16。21まではまだ余裕がありますね。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "player-total",
+      "sound": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "hit",
+      "params": {},
+      "finger": true,
+      "speed": "normal",
+      "text": "もう1枚引くときは「ヒット」。",
+      "highlight": "",
+      "position": "auto",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "4を引いて合計20!かなり21に近づきました。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "player-total",
+      "sound": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "stand",
+      "params": {},
+      "finger": true,
+      "speed": "normal",
+      "text": "これ以上引かないときは「スタンド」。",
+      "highlight": "",
+      "position": "auto",
+      "sound": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "dealer_play",
+      "params": {},
+      "finger": false,
+      "speed": "normal",
+      "text": "次はディーラーの番。伏せたカードをめくり、合計が17以上になるまで引きます。",
+      "highlight": "",
+      "position": "auto",
+      "sound": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "settle",
+      "params": {},
+      "finger": false,
+      "speed": "normal",
+      "text": "20対17で、こちらの勝ち!賭けたチップが2倍になって戻ってきます。",
+      "highlight": "",
+      "position": "auto",
+      "sound": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "clear",
+      "params": {},
+      "finger": false,
+      "speed": "normal",
+      "text": "",
+      "highlight": "",
+      "position": "auto",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "では、今度はあなたの番です!",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "input",
+      "action": "bet",
+      "params": {
+        "amount": 10
+      },
+      "text": "「ベット」を押して、チップを10枚賭けてみましょう。",
+      "hint": "光っている「ベット」ボタンを押してください。",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "deal",
+      "params": {},
+      "finger": false,
+      "speed": "normal",
+      "text": "",
+      "highlight": "",
+      "position": "auto",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "合計は11。どのカードを引いても21を超えません。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "player-total",
+      "sound": "auto"
+    },
+    {
+      "type": "input",
+      "action": "hit",
+      "params": {},
+      "text": "「ヒット」でもう1枚引いてみましょう。",
+      "hint": "合計11ならバーストしないので、ここは「ヒット」です。",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "text",
+      "text": "Kを引いて合計21!一番強い数字です。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "player-total",
+      "sound": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "dealer_play",
+      "params": {},
+      "finger": false,
+      "speed": "normal",
+      "text": "21になったので自動でスタンド。ディーラーの番です。",
+      "highlight": "",
+      "position": "auto",
+      "sound": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "settle",
+      "params": {},
+      "finger": false,
+      "speed": "normal",
+      "text": "21対17であなたの勝ち!",
+      "highlight": "",
+      "position": "auto",
+      "sound": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "clear",
+      "params": {},
+      "finger": false,
+      "speed": "normal",
+      "text": "",
+      "highlight": "",
+      "position": "auto",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "次は「バースト」を体験してみましょう。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "input",
+      "action": "bet",
+      "params": {
+        "amount": 10
+      },
+      "text": "まずはベット。",
+      "hint": "「ベット」ボタンを押してください。",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "deal",
+      "params": {},
+      "finger": false,
+      "speed": "normal",
+      "text": "",
+      "highlight": "",
+      "position": "auto",
+      "sound": "auto"
+    },
+    {
+      "type": "input",
+      "action": "hit",
+      "params": {},
+      "text": "合計15。あえて「ヒット」してみましょう。",
+      "hint": "今回は練習なので「ヒット」を押してください。",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "text",
+      "text": "9を引いて合計24。21を超えたのでバースト、この時点で負けです。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "player-total",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "合計が12〜16のときは、引くか止めるか迷いどころ。ディーラーの見えているカードも参考にしましょう。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "dealer-hand",
+      "sound": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "settle",
+      "params": {},
+      "finger": false,
+      "speed": "normal",
+      "text": "",
+      "highlight": "",
+      "position": "auto",
+      "sound": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "clear",
+      "params": {},
+      "finger": false,
+      "speed": "normal",
+      "text": "",
+      "highlight": "",
+      "position": "auto",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "最後に「スプリット」。最初の2枚が同じ数字のとき、2つの手に分けて別々に勝負できます。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "input",
+      "action": "bet",
+      "params": {
+        "amount": 10
+      },
+      "text": "ベットしましょう。",
+      "hint": "「ベット」ボタンを押してください。",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "deal",
+      "params": {},
+      "finger": false,
+      "speed": "normal",
+      "text": "",
+      "highlight": "",
+      "position": "auto",
+      "sound": "auto"
+    },
+    {
+      "type": "input",
+      "action": "split",
+      "params": {},
+      "text": "8が2枚そろいました!「スプリット」で2つに分けましょう。賭けたチップと同じ数を追加で出します。",
+      "hint": "8のペアなので「スプリット」を押してください。",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "text",
+      "text": "左の手から順番に操作します。左の手は8+3で11。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "player-hand",
+      "sound": "auto"
+    },
+    {
+      "type": "input",
+      "action": "hit",
+      "params": {},
+      "text": "左の手で「ヒット」してみましょう。",
+      "hint": "合計11なので「ヒット」が安全です。",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "input",
+      "action": "stand",
+      "params": {},
+      "text": "合計20。ここで「スタンド」しましょう。",
+      "hint": "20はとても強いので「スタンド」です。",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "input",
+      "action": "stand",
+      "params": {},
+      "text": "右の手は18。こちらも「スタンド」しましょう。",
+      "hint": "「スタンド」を押してください。",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "dealer_play",
+      "params": {},
+      "finger": false,
+      "speed": "normal",
+      "text": "ディーラーは16なので、もう1枚引きます。",
+      "highlight": "",
+      "position": "auto",
+      "sound": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "settle",
+      "params": {},
+      "finger": false,
+      "speed": "normal",
+      "text": "ディーラーがバースト!2つの手どちらも勝ちです。",
+      "highlight": "",
+      "position": "auto",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "これで基本はバッチリ。ヒット・スタンド・スプリットを使って21を目指そう!",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "chip-count",
+      "sound": "auto"
+    }
+  ]
+}

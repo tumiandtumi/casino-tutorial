@@ -21,6 +21,13 @@
     "updatedAt": "2026-10-28T02:57:30.633Z"
   },
   {
+    "id": "blackjack-sample",
+    "title": "ブラックジャックの遊び方",
+    "game": "blackjack",
+    "description": "21に近い方が勝ち。見本を見たあと、実際に操作して覚えよう。",
+    "updatedAt": "2026-10-28T03:03:07.222Z"
+  },
+  {
     "id": "poker-basic",
     "title": "ポーカー(テキサスホールデム)の遊び方",
     "game": "poker",
