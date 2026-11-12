@@ -12,34 +12,29 @@
   "steps": [
     {
       "type": "text",
-      "text": "ルーレットは、ボールがどの数字に止まるかを当てるゲームです。数字は0〜36の37マスあります。",
+      "text": "ルーレットは、ボールがどの数字に止まるかを当てるゲームです。",
       "position": "auto",
       "advance": "tap",
       "seconds": 3,
-      "highlight": "wheel",
+      "highlight": "",
       "sound": "auto"
     },
     {
-      "type": "demo",
-      "action": "bet",
-      "params": {
-        "kind": "red",
-        "number": 17,
-        "amount": 10
-      },
-      "finger": true,
-      "speed": "normal",
-      "text": "「赤」のマスにチップを10枚置きます。",
-      "highlight": "",
-      "position": "auto"
-    },
-    {
       "type": "text",
-      "text": "今度はあなたの番です!",
+      "text": "数字は0〜36の37マスあります。",
       "position": "auto",
       "advance": "tap",
       "seconds": 3,
-      "highlight": "",
+      "highlight": "number-grid",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "その他にも奇数、偶数、色など様々なマスがあります。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "outside-bets",
       "sound": "auto"
     },
     {
@@ -57,14 +52,137 @@
     },
     {
       "type": "input",
+      "action": "bet",
+      "params": {
+        "kind": "red",
+        "number": 17,
+        "amount": 10
+      },
+      "text": "「赤」のマスにもチップを置いてみましょう。",
+      "hint": "",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "text",
+      "text": "一度に複数の箇所に賭けることも可能です。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "チップを賭けることをベットといいます。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "掛け金が決まったらルーレットを回します。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "demo",
       "action": "spin",
       "params": {
         "result": 17
       },
+      "finger": false,
+      "speed": "slow",
       "text": "",
-      "hint": "",
       "highlight": "",
       "position": "auto"
+    },
+    {
+      "type": "text",
+      "text": "17が出ましたね。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "result",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "今回は黒に入ったので黒のマスにベットしたチップの倍の20チップが返ってきます。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "bet-black",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "外れた場合、掛けたチップは返却されません。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "bet-red",
+      "sound": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "settle",
+      "params": {},
+      "finger": false,
+      "speed": "normal",
+      "text": "",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "text",
+      "text": "掛ける場所によってそれぞれ倍率が異なります",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "1~18、19~36のマスは3倍",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "outside-bets",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "その他の外側のマスはすべて2倍、",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "outside-bets",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "数字単体に掛けた場合は掛け金の36倍のチップが返ってきます。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "number-grid",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "チュートリアルは以上です。実際にやってみましょう！",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
     }
   ]
 }
