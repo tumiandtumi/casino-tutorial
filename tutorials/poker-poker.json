@@ -7,7 +7,7 @@
   "endMessage": "ルールがわかったら、ポーカーのテーブルで遊んでみてください!",
   "bgm": "night",
   "setup": {
-    "deck": "AH 9C AS 8D KD 7C 2S QH 3D",
+    "deck": "AH KD KH AS 3C QH JH KS 10H",
     "chips": 100,
     "opponentChips": 100
   },
@@ -15,6 +15,15 @@
     {
       "type": "text",
       "text": "テキサスホールデムは、自分の手札2枚と、みんなで使う場のカード5枚を組み合わせて、一番強い5枚の役を作るゲームです。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "カードの数字の強さはAが一番強く、次いでK・Q・J・10・9・8・7・6・5・4・3・2の順に弱くなっていきます。",
       "position": "auto",
       "advance": "tap",
       "seconds": 3,
@@ -31,19 +40,288 @@
       },
       "finger": false,
       "speed": "normal",
-      "text": "最初に2人が決まった額を出します(ブラインド)。これがポットに入ります。",
+      "text": "",
       "highlight": "",
       "position": "auto"
+    },
+    {
+      "type": "text",
+      "text": "最初に2人が決まった額を出します(ブラインド)。これがポットに入ります。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "pot",
+      "sound": "auto"
     },
     {
       "type": "demo",
       "action": "deal",
       "params": {},
       "finger": false,
-      "speed": "normal",
-      "text": "手札が2枚ずつ配られます。相手の手札は見えません。",
+      "speed": "slow",
+      "text": "",
       "highlight": "",
       "position": "auto"
+    },
+    {
+      "type": "text",
+      "text": "手札が2枚ずつ配られます。相手の手札は見えません。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "配られた手札をみてアクション（チェック/ベット/コール/レイズ/フォールド）を行います。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "player-hand",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "コールをしましょう。コールとは、前のプレイヤーと同額のチップを支払い、勝負に参加するアクションのことです。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "自分の手札がそこそこ強く、勝負を降りたくない場面などで行います。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "input",
+      "action": "call",
+      "params": {},
+      "text": "コールをしましょう。",
+      "hint": "光っている「コール」のボタンを押しましょう。",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "opponent",
+      "params": {
+        "move": "check",
+        "amount": ""
+      },
+      "finger": false,
+      "speed": "normal",
+      "text": "",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "flop",
+      "params": {},
+      "finger": false,
+      "speed": "normal",
+      "text": "",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "text",
+      "text": "ここからは場のカードと自分の手札のカードをみて、次のアクションを決めていきます。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "opponent",
+      "params": {
+        "move": "check",
+        "amount": ""
+      },
+      "finger": false,
+      "speed": "slow",
+      "text": "",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "text",
+      "text": "相手がチェックをし、自分にターンが回ってきました。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "こちらもチェックをしましょう。チェックとは、追加のチップを賭けずに、次のプレイヤーへ順番を回すアクションのことです。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "input",
+      "action": "check",
+      "params": {},
+      "text": "チェックをしましょう。",
+      "hint": "光っている「チェック」のボタンを押しましょう。",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "turn",
+      "params": {},
+      "finger": false,
+      "speed": "normal",
+      "text": "",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "opponent",
+      "params": {
+        "move": "bet",
+        "amount": 15
+      },
+      "finger": false,
+      "speed": "normal",
+      "text": "",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "text",
+      "text": "相手が15チップベットしてきました。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "相手がベットやレイズをしてきた場合はチェックができません。コールやレイズをして勝負を続けるか。フォールドを選んで勝負から降りましょう。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "input",
+      "action": "call",
+      "params": {},
+      "text": "コールをしましょう。",
+      "hint": "光っている「コール」のボタンを押しましょう。",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "river",
+      "params": {},
+      "finger": false,
+      "speed": "normal",
+      "text": "",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "opponent",
+      "params": {
+        "move": "bet",
+        "amount": 20
+      },
+      "finger": false,
+      "speed": "normal",
+      "text": "",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "text",
+      "text": "レイズをしましょう。レイズとは前のプレイヤーが賭けた金額に対して、2倍以上の金額を上乗せして賭け直すアクションのことです。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "掛け金をあげることでゲームに参加し続けるためのハードルを引き上げ、相手に難しい判断を迫ることができます。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "input",
+      "action": "raise",
+      "params": {
+        "amount": 20
+      },
+      "text": "レイズをしてみましょう。",
+      "hint": "光っている「レイズ」のボタンを押しましょう。",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "opponent",
+      "params": {
+        "move": "call",
+        "amount": ""
+      },
+      "finger": false,
+      "speed": "slow",
+      "text": "",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "showdown",
+      "params": {},
+      "finger": false,
+      "speed": "slow",
+      "text": "",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "text",
+      "text": "相手より強い役を作ったので勝ちました。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "player-rank",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "これで基本はバッチリ。相手との心理戦に勝ってチップを手に入れよう！",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
     }
   ]
 }
