@@ -7,13 +7,6 @@
     "updatedAt": "2026-10-28T00:15:27.267Z"
   },
   {
-    "id": "bj",
-    "title": "ブラックジャックの遊び方",
-    "game": "blackjack",
-    "description": "",
-    "updatedAt": "2026-10-28T02:54:29.572Z"
-  },
-  {
     "id": "blackjack-1",
     "title": "ブラックジャックの遊び方",
     "game": "blackjack",
@@ -26,6 +19,13 @@
     "game": "blackjack",
     "description": "21に近い方が勝ち。見本を見たあと、実際に操作して覚えよう。",
     "updatedAt": "2026-10-28T03:03:07.222Z"
+  },
+  {
+    "id": "bj",
+    "title": "ブラックジャックの遊び方",
+    "game": "blackjack",
+    "description": "ブラックジャックのルールを説明します",
+    "updatedAt": "2026-11-17T04:48:13.164Z"
   },
   {
     "id": "poker-basic",

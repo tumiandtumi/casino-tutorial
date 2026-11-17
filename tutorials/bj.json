@@ -3,22 +3,134 @@
   "id": "bj",
   "game": "blackjack",
   "title": "ブラックジャックの遊び方",
-  "description": "",
-  "endMessage": "",
+  "description": "ブラックジャックのルールを説明します",
+  "endMessage": "これでチュートリアル終了です！",
   "bgm": "lounge",
   "setup": {
-    "deck": "10H 7C 6S 10D 4H",
+    "deck": "10H 7C 6S 10D 4H AS",
     "chips": 100
   },
   "steps": [
     {
       "type": "text",
-      "text": "ようこそ!ここに最初の説明を書きます。",
+      "text": "ブラックジャックは手札の数字の合計が21を超えないようにしつつディーラーより高い数字を目指すゲームです。",
       "position": "auto",
       "advance": "tap",
       "seconds": 3,
       "highlight": "",
       "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "ルールとして10,J,Q,K は10として扱い、Aは1か11のどちらか好きな方の数字として扱います。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "deal",
+      "params": {},
+      "finger": false,
+      "speed": "normal",
+      "text": "まずプレイヤーとディーラーに2枚のカード配られます。",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "input",
+      "action": "hit",
+      "params": {},
+      "text": "ヒット(カードを一枚引く)をしてみましょう。",
+      "hint": "ヒット(カードを一枚引く)をしましょう。",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "text",
+      "text": "ヒットは手札の数字の合計が21を超えない限り、何回でもできます。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "input",
+      "action": "hit",
+      "params": {},
+      "text": "もう一度ヒットをしてみましょう。",
+      "hint": "もう一度ヒットをしてみましょう。",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "text",
+      "text": "プレイヤーが引き終わったら、ディーラーのターンです。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "reveal",
+      "params": {},
+      "finger": true,
+      "speed": "slow",
+      "text": "ディーラーは自分のターンに伏せていたカードをめくります。",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "text",
+      "text": "ディーラーは自分の手札の数字が17以上になるまでカードを引きます。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "text",
+      "text": "今回は最初の手札の合計が17なのでカードを引きません。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "dealer-hand",
+      "sound": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "settle",
+      "params": {},
+      "finger": false,
+      "speed": "normal",
+      "text": "ディーラーより手札の数字が多いのであなたの勝ちです",
+      "highlight": "",
+      "position": "auto"
+    },
+    {
+      "type": "text",
+      "text": "次のチュートリアルを行います。",
+      "position": "auto",
+      "advance": "tap",
+      "seconds": 3,
+      "highlight": "",
+      "sound": "auto"
+    },
+    {
+      "type": "demo",
+      "action": "clear",
+      "params": {},
+      "finger": false,
+      "speed": "normal",
+      "text": "",
+      "highlight": "",
+      "position": "auto"
     }
   ]
 }
